@@ -1,28 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Fruit and Veggies</title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
-        <script src="js/fruits_and_veggies_test.js"></script>
-        <script src="js/app.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            <h1>Fruit and Veggies</h1>
-            <div class="row">
-                <div class="col-sm-4">
-                    col 1
-                </div>
-                <div class="col-sm-4">
-                    col 2
-                </div>
-                <div class="col-sm-4">
-                    col 3
-                </div>
-            </div>
+<head>
+  <title>Fruit and Veggies</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+  <script src="js/fruits_and_veggies_test.js"></script>
+  <script src="js/app.js"></script>
+</head>
+
+<body ng-app="App">
+  <div ng-controller="MyController" class="container">
+    <button ng-click="checkForWin()">Check For Win </button>
+    <h1 class="well">Fruit and Veggies</h1>
+    <div class="row">
+      <div class="col-sm-4">
+        <h2 class="well">Fruits</h2>
+        <div class="row" ng-repeat="fruit in fruits track by $index">
+          <div class="col-xs-4"></div>
+          <div class="col-xs-4">{{fruit}}</div>
+          <div class="col-xs-4"><button ng-click="moveHorizontal('pool', $index, 'fruits')" ng-class="{incorrect: }">&rarr;</button></div>
         </div>
-    </body>
+      </div>
+      <div class="col-sm-4">
+        <h2 class="well">Pool</h2>
+        <div class="well" ng-repeat="item in pool track by $index">
+          <div class="row">
+            <div class="col-xs-4"> <button ng-click="moveHorizontal('fruits', $index, 'pool')"> &larr; </button> </div>
+            <div class="col-xs-4"> {{item}} </div>
+            <div class="col-xs-4"> <button ng-click="moveHorizontal('vegetables', $index, 'pool')">&rarr; </button> </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <h2 class="well">Vegetables</h2>
+        <div class="row" ng-repeat="vegetable in vegetables track by $index">
+          <div class="col-xs-4"><button ng-click="moveHorizontal('pool', $index, 'vegetables')" ng-class="{incorrect: }">&larr;</button></div>
+          <div class="col-xs-4">{{vegetable}}</div>
+          <div class="col-xs-4"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
